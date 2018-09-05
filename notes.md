@@ -1,11 +1,18 @@
-#MidwestJS 2018 Notes
-##Day 1
+# MidwestJS 2018 Notes
+## Day 1
 
-###React Workshop
+### React Workshop
+_Dustin Schau & Travis Martensen_
 
-##Day 2 
+[Workshop and Labs](https://react-training.objectpartners.com)
 
-###Automated Testing with Cypress
+## Day 2 
+
+### Automated Testing with Cypress
+_Mike Plummer_
+
+[Slides](https://mike-plummer.github.io/cypress-presentation/#/)
+
 * Common Problems
   * Require manual intervention
   * Non-idempotent
@@ -14,7 +21,7 @@
   * cross-browser compatibility
     * With Selenium they don't really work the same way
 * Tests are flaky, hard to maintain and hard to setup
-* Cypress runs inside the browser  and repalces the browser app interface
+* Cypress runs inside the browser and replaces the browser app interface
 * Uses well-know stack: Mocha + Chai + Sinon
 * Auto-waiting to reduce flake. Selenium doesn't do this, it doesn't wait.
 * Runs in the browser so it's debuggable
@@ -30,20 +37,36 @@
 * Setup/Config
   * Node, Common OS packages for headless browser support
   * No special IDE tools required
-* Install: `yarn add cypress --dev`, 
-* Setup: `yarn cypress open`
-* See slides for directory structure
+* Install: `yarn add cypress --dev` or `npm install cypress --save-dev`
+* Setup: `yarn cypress open` or `npx cypress open`
+> Directory structure
+```
+cypress.json
+/cypress
+  /fixtures
+    - *.json
+
+  /integration
+    - *.spec.js
+
+  /plugins
+    - index.js
+
+  /support
+    - commands.js
+    - index.js
+```
 * Plugins is an advanced topic we won't cover
 * `/support` common commands can go here
 * `yarn cypress run` runs all tests, `cypress open` is the interactive test runner. Includes it's own Chromium browser but allows you to choose one from your system that it automatically searches for.
 * May not currently have test suite capabilities - presenter didn't know.
-* See online docs for API details
+* See [online docs](https://docs.cypress.io/guides/overview/why-cypress.html#) for API details
   * Tests use Mocha + Chai
   * `context` is a stylistic feature for grouping
   * All Cypress actions start with `cy`
   * Cypress is promise-based. Actions are executed asynchronously
   * `Record` Videos automatically recorded during `cypress run`. Screenshots automatically taken on failure.
-  * Selector builder (playground on CLI) for `get` which uses jQuery style selectors to target specific elements. Waits for them and will timeout after default time that can be modified before erroring out.
+  * _Selector builder_ (playground on CLI) for `get` which uses jQuery style selectors to target specific elements. Waits for them and will timeout after default time that can be modified before erroring out.
   * Can alias element selectors
   * Interactions
   * Viewport for scrolling into view, moving things around, resize, etc. Can be used for responsive design.
@@ -54,30 +77,36 @@
   * Can make XHR requests
   * Commands is a way to extract steps and create a custom Cypress API entry for re-use.
 * Test runner live updates as you write tests
-* Roadmap: multi-browser but never IE. Sauce Labs integration.
+* Roadmap: multi-browser but **never IE**. Sauce Labs integration.
 
 
 
-###Modern JavaScript Tools
-* Slides can be found at https://github.com/mvolkmann/talks. He runs everything from node/npm.
+### Modern JavaScript Tools
+_Mark Volkmann_
+
+[Slides](https://github.com/mvolkmann/talks/blob/master/ModernJSTools.key.pdf)
+
+* He runs everything from node/npm.
 * `npx` See https://www.npmjs.com/package/npx
 * See cross-environment scripts for commands defined in package.json.
 * `ESLint` instead of older jslint
-  * Has --fix mode that modifies source files for some common errors
-  * See also babel-eslint
+  * Has `--fix` mode that modifies source files for some common errors
+  * See also `babel-eslint`
 * Prettier
-* Babel. Use configuration .babelrc to control browsers and Node versions supported.
+* Babel. Use configuration `.babelrc` to control browsers and Node versions supported.
 * Skipped Jest and Flow slides
 * Istanbul comes with Jest for coverage but can be used standalone
-* See Parcel which he uses over Webpack or Rollup. Transpiles using Babel. Enables use of ES6 import/export syntax rathr than adding a script tag for each .js file in main html.
+* See [Parcel](https://parceljs.org) which he uses over Webpack or Rollup. Transpiles using Babel. Enables use of ES6 import/export syntax rathr than adding a script tag for each .js file in main html.
   * Has a watch/reload capability
 * Browsersync
 * Husky: Git hooks made easy. 
-* Likes Flow.js over TypeScript for various reasons noted in the slides. Facebook team is focusing on ReasonML instead of flow. It compiles to JS.
+* Likes [Flow.js](https://flow.org) over TypeScript for various reasons noted in the slides. Facebook team is focusing on [ReasonML](https://reasonml.github.io) instead of flow. It compiles to JS.
 
 
-####Room with a Vue - Introduction to Vue.js
-* Vue is a library, not a framework. Falls between Angular and React. Focuses on the "view" of MVC.
+### Room with a Vue - Introduction to Vue.js
+_Zachary Klein_
+
+* Vue is a library, not a framework. Falls between Angular and React. Focuses on the "view" portion of MVC.
 * Install from NPM. Latest is v3 which is not GA.
 * Easiest way is to source in library from CDN.
 * Starts when you create `new Vue({...})` instance. You pass an object where you identify what in the DOM it will manage/render.
@@ -90,13 +119,18 @@
 * `components` Nested component hierarchy. Each renders either a template or returns `createElement()` calls (JSX is supported). Single file components (*.vue files)
 
 
-###Rapid REST API Development with Node and SailsJS
-* https://digitaldrummerj.me
+### Rapid REST API Development with Node and SailsJS
+_[Justin James](https://digitaldrummerj.me)_
+
+[Slides](https://www.slideshare.net/digitaldrummerj/rapid-api-development-with-node-and-sails)
+
+[Code](TBD)
+
 * Auto-generated REST APIs
 * Any database
 * Flexible and configurable
 * Security policies, simple yes/no checks. Wiring done for you. Setup via configurations
-* Built on top of Express
+* Built on top of _Express_
 * Ridiculously fast and it just works
 * Does not hide the magic
 * Getting started
@@ -104,7 +138,7 @@
   * `npm install -g sails` Generates new project, comes with a server and generates models, actions and controllers
   * Has the Vue engine installed
 * `sails new [project name]` Choose option 2 blank app
-* `sails lift`
+* `sails lift` Start Sails server
 * `sails inspect` Chrome debugger
 * `sails console` 
 * `sails generate [type] [name]`
@@ -120,8 +154,11 @@
 * Recommend for production that you explicitly define your routes
 
 
-####E2E testing your SEO with headless chrome and puppeteer
-* https://blog.tristansokol.com/Presentations/seo-testing/index.html#/
+### E2E testing your SEO with headless chrome and puppeteer
+_Tristan Sokol_
+
+[Slides](https://blog.tristansokol.com/Presentations/seo-testing/index.html#/)
+
 * Options for different outputs - PDF, images.
 * Image diffing - see pixelmatch link on slides
 * Puppeteer - Node.js bindings for headless Chrome
@@ -130,9 +167,11 @@
 * Typing allows you to slow it down so type-ahead events can occur
 
 
-##Day 3
+## Day 3
 
-###Accessibility for Web Apps
+### Accessibility for Web Apps
+_Aaron Cannon_
+
 * Speakers from Accessible360 in Minneapolis. They specialize in A11Y.
 1. What is it?
 2. Getting Started
@@ -198,7 +237,9 @@
 * JAWS or NVDA tools. Good idea to bring in someone who uses a screen reader for QA testing and important to have someone in the organization who understands what a11y is and how to do it.
 * JIRA broker their entire page recently causing screen readers to not read anything.
 
-###Modern JavaScript in the Java-only Enterprise
+### Modern JavaScript in the Java-only Enterprise
+_Bruce Coddington_
+
 Bruce Coddington - works at Mutual of Omaha. Modernizing their applications from the 70's.
 * Didn't trust JavaScript. They were using GWT. Tons of Java to build small amounts of JavaScript.
 * Years invested in a component library in GWT.
@@ -241,7 +282,9 @@ Bruce Coddington - works at Mutual of Omaha. Modernizing their applications from
 * Don't try to do it alone. Build a community
 
 
-###Hello Real World of Legacy Code: Story of Yelp's Migrate to React
+### Hello Real World of Legacy Code: Story of Yelp's Migrate to React
+_Tanvi_
+
 * Why is legacy code a concern?
   * Architectural decisions
     * Scalability
@@ -255,7 +298,9 @@ Bruce Coddington - works at Mutual of Omaha. Modernizing their applications from
 * Forsee the future - requires some experience
 * See **Bugsnag.com** tool for monitoring application stability
 
-###Building a GraphQL Client in JavaScript
+### Building a GraphQL Client in JavaScript
+_Joe Karlsson_
+
 * JavaScript, GraphQL, Apollo and React
 * https://github.com/JoeKarlsson/graphql-apollo-demo
 * GraphQL is a REST killer. Instead of hitting separate REST endpoints you hit a single endpoint. GraphQL does the work for you.
@@ -282,7 +327,11 @@ Bruce Coddington - works at Mutual of Omaha. Modernizing their applications from
 * How to get better at it since it can be intimidating - just try it, play around with graphqlhub.com, howtographql.com
 * Very actively being changed so be aware if you build for production is may change! 
 
-###Using JavaScript to write Native Application/SDKs for iOS, Android and the web
+### Using JavaScript to write Native Application/SDKs for iOS, Android and the web
+_Siddharth Malkireddy/Derek Anderson_
+
+[OpenSource Site](https://syr.js.org)
+
 * Speakers from PayPal
 * Slow cycle to update SDK when you just want to change the UI to keep it up to date with the latest. They want dynamically updatable UIs. Needed to be simple for merchants to integrate.
 * Less friction with merchants
